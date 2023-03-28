@@ -35,3 +35,16 @@ def solve(operation):
                         
 operation = input("Enter an operation with addition and multiplication: ")
 print(solve(operation))
+
+cad = str(input("..."))
+cad = cad.replace(" ","")
+lista = cad.split("+")
+mult = []
+print(lista)
+for i in range(0, len(lista)):
+    elemnt = lista[i]
+    if "*" in elemnt:
+        mult = elemnt
+        print(mult)
+    break
+"""def multiplicator()"""
