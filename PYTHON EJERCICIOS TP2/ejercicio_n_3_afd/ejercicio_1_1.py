@@ -1,6 +1,6 @@
 import re
 
-class AFD:
+class Afd:
     def __init__(self, pattern):
         self.pattern = pattern
         
@@ -8,6 +8,6 @@ class AFD:
         return bool(re.match(self.pattern, input_string))
 
 pattern = r'^(a|b)*$'
-in_str = str(input("..."))
-automation = AFD(pattern)
+in_str = str(input("Enter the corresponding character: "))
+automation = Afd(pattern)
 print(automation.read_in(in_str))
