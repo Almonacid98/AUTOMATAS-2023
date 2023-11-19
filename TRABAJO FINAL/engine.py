@@ -1,9 +1,16 @@
 import csv
 import re
+import os
 
 class Engine:
     def __init__(self):
         self.__sorted_tracks = []
+    
+    def clear_console(self):
+        if os.name == "nt":
+            os.system("cls")
+        else:
+            os.system("clear")
     
     def reset_tracks(self):
         self.__sorted_tracks = []
@@ -30,6 +37,7 @@ class Engine:
 
     def list_top5(self, column):
         sorted_tracks = self.load_tracks(column)
+        self.clear_console()
         print(f"\nTop 5 by {column}:")
         
         seen_tracks = set()
@@ -57,5 +65,6 @@ class Engine:
 
         # Mostrar las 5 canciones con el mejor ratio
         print("\nTop 5 canciones con mejor ratio (Likes/Views):")
+        self.clear_console()
         for i, track in enumerate(self.__sorted_tracks[:5], start=1):
             print(f"{i}. {track['Track']} - Ratio: {track['Ratio'] * 100:.2f}%")

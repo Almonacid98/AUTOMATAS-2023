@@ -4,53 +4,55 @@ from engine import Engine
 def menu():
     engine = Engine()
     archivo = "Listado_temas_2023.csv"
-    valid_columns = ["Likes", "Comments", "Views", "Duration_ms", "Stream"]
     
     while True:
-        print("\nMenú:")
-        print("1. Listar Top 5 de canciones por distintos parametros")
-        print("2. Obtener Top 5 de ratio")
-        print("3. Buscar canción por nombre")
-        print("4. Agregar nueva canción")
-        print("5. Obtener Top 10 de canciones por duración")
-        print("6. Obtener Top 10 de artistas")
-        print("7. Guardar cambios y salir")
-        print("8. Salir")
-        opcion = input("Ingrese la opción: ")
+        print("\nMenu:")
+        print("1. List Top 5 songs by different parameters")
+        print("2. Get Top 5 by ratio")
+        print("3. Search for a song by name")
+        print("4. Add a new song")
+        print("5. Get Top 10 songs by duration")
+        print("6. Get Top 10 artists")
+        print("7. Save changes and exit")
+        print("8. Exit")
+        option = input("Enter your choice: ")
 
-        if opcion == "1":
+        if option == "1":
             print("\nSelect any of the following columns:")
+            valid_columns = ["Likes", "Comments", "Views", "Duration_ms", "Stream"]
             for i, selection in enumerate(valid_columns):
                 print(f"{i+1}. {selection}")
             print("0. Exit")
-            selection = int(input("Ingrese la opción: "))
+            selection = int(input("Enter your choice: "))
             
             if selection not in range(len(valid_columns) + 1):
-                print(f"Error: La opción {selection} no es válida.")
+                print(f"Error: Option {selection} is not valid.")
                 continue
             elif selection == 0:
                 break
             else:
                 engine.list_top5(valid_columns[selection - 1])
 
-        elif opcion == "2":
+        elif option == "2":
             engine.list_for_ratio()
-        elif opcion == "3":
-            parte_nombre = input("Ingrese parte del nombre de la canción: ")
-            engine.buscar_cancion()
-        elif opcion == "4":
-            engine.agregar_nueva_fila()
-        elif opcion == "5":
-            engine.obtener_top10_duracion()
-        elif opcion == "6":
-            engine.obtener_top10_artistas()
-        elif opcion == "7":
-            engine.escribir_archivo_csv(archivo, )  # Guardar cambios antes de salir
+        elif option == "3":
+            partial_name = input("Enter part of the song name: ")
+            engine.search_song(partial_name)
+        elif option == "4":
+            engine.add_new_row()
+        elif option == "5":
+            engine.get_top10_duration()
+        elif option == "6":
+            engine.get_top10_artists()
+        elif option == "7":
+            engine.write_csv_file()  # Save changes before exiting
+            engine.clear_console()
             break
-        elif opcion == "8":
+        elif option == "8":
+            engine.clear_console()
             break
         else:
-            print("Opción no válida. Intente nuevamente.")
+            print("Invalid option. Please try again.")
 
 if __name__ == "__main__":
     menu()
