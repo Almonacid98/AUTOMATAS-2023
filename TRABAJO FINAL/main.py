@@ -3,7 +3,6 @@ from engine import Engine
 # Menú principal
 def menu():
     engine = Engine()
-    archivo = "Listado_temas_2023.csv"
     
     while True:
         print("\nMenu:")
