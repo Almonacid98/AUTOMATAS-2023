@@ -1,57 +1,100 @@
-from engine import Engine
+from engine_metrics import *
+from ratio_metrics import *
+from search_song import *
+from add_new_song import *
+from top_duration_songs import *
+from top_artist import *
 
-# Menú principal
-def menu():
-    engine = Engine()
-    
+from clear import *
+def start_menu():
     while True:
-        print("\nMenu:")
-        print("1. List Top 5 songs by different parameters")
-        print("2. Get Top 5 by ratio")
-        print("3. Search for a song by name")
-        print("4. Add a new song")
-        print("5. Get Top 10 songs by duration")
-        print("6. Get Top 10 artists")
-        print("7. Save changes and exit")
-        print("8. Exit")
-        option = input("Enter your choice: ")
+            print("<<<<<Music system list>>>>>")
+            print("1 = List Top 5 songs by different metrics:")
+            print("2 = Get Top 5 by ratio: ")
+            print("3 = Search for a song by name:")
+            print("4 = Add a new song:")
+            print("5 = Get Top 10 songs by duration:")
+            print("6 = Get Top 10 artists:")
+            print("7 = <<Exit>")
+            selection = input("CHOOSE THE OPTION[1/2/3/4/5/6/7]  = ")
+            if selection == '1':
+                while True:
+                    print("<<<<<Music system list>>>>>")
+                    print("1 = List Top 5 songs by likes:")
+                    print("2 = List Top 5 songs by comments:")
+                    print("3 = List Top 5 songs by views:")
+                    print("4 = <<Back To The Principal Menu>")
+                    selection = input("CHOOSE THE OPTION[1/2/3/4]  = ")
+                    if selection == '1':
+                        SongMetricsEngine.list_top_songs_by_likes()
+                        input("Press Enter to continue...")
+                        clear_console()
+                    elif selection == '2':
+                        CommentsMetricsEngine.list_top_songs_by_comments()
+                        input("Press Enter to continue...")
+                        clear_console()
+                    elif selection == '3':
+                        ViewsMetricsEngine.list_top_songs_by_views()
+                        input("Press Enter to continue...")
+                        clear_console()
+                    elif selection == '4':
+                        clear_console()
+                        break
+                    else:
+                        print("\n Invalid option. Please try again.")
+                        clear_console()
 
-        if option == "1":
-            print("\nSelect any of the following columns:")
-            valid_columns = ["Likes", "Comments", "Views", "Duration_ms", "Stream"]
-            for i, selection in enumerate(valid_columns):
-                print(f"{i+1}. {selection}")
-            print("0. Exit")
-            selection = int(input("Enter your choice: "))
-            
-            if selection not in range(len(valid_columns) + 1):
-                print(f"Error: Option {selection} is not valid.")
-                continue
-            elif selection == 0:
+            elif selection == '2':
+
+                RatioMetricsEngine.list_for_ratio()
+                clear_console()
+
+            elif selection == "3":
+                
+                SearchSongEngine.search_song()
+                clear_console()
+
+            elif selection == "4":
+               while True:
+                    print("<<<<<Music system list>>>>>")
+                    print("1 = Add a new song:")
+                    print("2 = Add multiple songs from a file:")
+                    print("3 = <<Back To The Principal Menu>")
+                    selection = input("CHOOSE THE OPTION[1/2/3]  = ")
+                    if selection == '1':
+                        AddSongEngine.add_new_song()
+                        input("Press Enter to continue...")
+                        clear_console()
+
+                    elif selection == '2':
+                        AddSongEngine.add_multiple_songs_from_file()  #no funciona aun, falta terminar y ver que pide en verdad el profesor
+                        input("Press Enter to continue...")
+                        clear_console()
+
+                    elif selection == '3':
+                        clear_console()
+                        break
+                    else:
+                        print("\n Invalid option. Please try again.")
+
+            elif selection == "5":
+
+                SongDurationTop.list_top_songs_by_duration()
+                clear_console()
+                    
+            elif selection == '6':
+                
+                TopArtistViews.list_top_artists_by_views()
+                clear_console()
+
+            elif selection == '7':
+
+                clear_console()
+                print("¡Thanks For Use The App Music System!")
                 break
+
             else:
-                engine.list_top5(valid_columns[selection - 1])
+                clear_console()
+                print("\n Invalid option. Please try again.")
 
-        elif option == "2":
-            engine.list_for_ratio()
-        elif option == "3":
-            partial_name = input("Enter part of the song name: ")
-            engine.search_song(partial_name)
-        elif option == "4":
-            engine.add_new_row()
-        elif option == "5":
-            engine.get_top10_duration()
-        elif option == "6":
-            engine.get_top10_artists()
-        elif option == "7":
-            engine.write_csv_file()  # Save changes before exiting
-            engine.clear_console()
-            break
-        elif option == "8":
-            engine.clear_console()
-            break
-        else:
-            print("Invalid option. Please try again.")
-
-if __name__ == "__main__":
-    menu()
+start_menu()
