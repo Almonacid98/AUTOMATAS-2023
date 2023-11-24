@@ -1,10 +1,9 @@
 from engine_metrics import *
 from ratio_metrics import *
 from search_song import *
-from add_new_song import *
+from add_new_song import AddSong
 from top_duration_songs import *
 from top_artist import *
-
 from clear import *
 def start_menu():
     while True:
@@ -62,12 +61,12 @@ def start_menu():
                     print("3 = <<Back To The Principal Menu>")
                     selection = input("CHOOSE THE OPTION[1/2/3]  = ")
                     if selection == '1':
-                        AddSongEngine.add_new_song()
+                        AddSong.add_new_song()
                         input("Press Enter to continue...")
                         clear_console()
 
                     elif selection == '2':
-                        AddSongEngine.add_multiple_songs_from_file()  #no funciona aun, falta terminar y ver que pide en verdad el profesor
+                        AddSong.add_multiple_songs_from_file()  #no funciona aun, falta terminar y ver que pide en verdad el profesor
                         input("Press Enter to continue...")
                         clear_console()
 
